@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+const z_env_dbPort = z.coerce.number().int().min(1).max(65535);
+
 export const z_env = z
   .object({
     NODE_ENV: z.enum(['dev', 'prod']),
@@ -7,12 +9,12 @@ export const z_env = z
     DEV_POSTGRES_PASSWORD: z.string().min(5).max(255),
     DEV_POSTGRES_DB: z.string(),
     DEV_POSTGRES_HOST: z.string(),
-    DEV_POSTGRES_PORT: z.string(),
+    DEV_POSTGRES_PORT: z_env_dbPort,
     PROD_POSTGRES_USER: z.string(),
     PROD_POSTGRES_PASSWORD: z.string(),
     PROD_POSTGRES_DB: z.string(),
     PROD_POSTGRES_HOST: z.string(),
-    PROD_POSTGRES_PORT: z.string(),
+    PROD_POSTGRES_PORT: z_env_dbPort,
   })
   .transform((input) => {
     switch (input.NODE_ENV) {
