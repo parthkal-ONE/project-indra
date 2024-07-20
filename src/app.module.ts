@@ -19,22 +19,6 @@ import { UsersModule } from './users/users.module';
     TypeOrmModule.forRoot(
       new EnvService(new ConfigService()).getTypeOrmConfig(),
     ),
-    // TypeOrmModule.forRootAsync({
-    //   imports: [EnvModule],
-    //   useFactory: (envService: EnvService) => ({
-    //     type: 'postgres',
-    //     host: envService.get('POSTGRES_HOST'),
-    //     port: envService.get('POSTGRES_PORT'),
-    //     username: envService.get('POSTGRES_USER'),
-    //     database: envService.get('POSTGRES_DB'),
-    //     password: envService.get('POSTGRES_PASSWORD'),
-    //     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    //     synchronize: envService.get('NODE_ENV') === 'dev',
-    //     migrations: [__dirname + '/migrations/*{.ts,.js}'],
-
-    //   }),
-    //   inject: [EnvService],
-    // }),
     UsersModule,
   ],
   controllers: [AppController],
